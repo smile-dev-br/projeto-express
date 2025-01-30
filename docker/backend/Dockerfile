@@ -1,5 +1,6 @@
 FROM dunglas/frankenphp
-# Instalar dependências do sistema e Composer
+
+# Instalar dependências do sistema, Composer, Node.js e npm
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -16,6 +17,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl zip pdo pdo_mysql \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm
 
 # Criar manualmente o diretório global do Composer e garantir permissões
 RUN mkdir -p /root/.composer && chmod -R 755 /root/.composer
