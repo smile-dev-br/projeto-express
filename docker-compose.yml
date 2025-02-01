@@ -14,7 +14,7 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-    - ./backend/:/app
+    - ./app/:/app
     depends_on:
       -  mysql.studio.caudas.express
       -  redis.studio.caudas.express
